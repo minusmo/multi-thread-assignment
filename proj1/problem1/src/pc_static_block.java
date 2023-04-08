@@ -29,14 +29,6 @@ public class pc_static_block {
         System.out.println("Program Execution Time: " + timeDiff + "ms");
         System.out.println("1..." + (NUM_END - 1) + " prime# counter=" + counter.get());
     }
-    private static boolean isPrime(int x) {
-        int i;
-        if (x<=1) return false;
-        for (i=2;i<x;i++) {
-            if (x%i == 0) return false;
-        }
-        return true;
-    }
 
     private static int[] divideIntoSubtasks(int num_end, int num_threads) {
         int[] workloads = new int[num_threads];
@@ -54,27 +46,9 @@ public class pc_static_block {
         for (int i=0;i<subTasks.length;i++) {
             if (i!=0) {workStart = subTasks[i-1]+1;}
             workEnd = subTasks[i];
-            workers[i] = new VerificationWorker("WID: " + i, workStart, workEnd, counter);
+            workers[i] = new PrimeCheckWorker("WID: " + i, workStart, workEnd, counter);
         }
         return workers;
     }
 
-    private static class VerificationWorker extends Thread {
-        final private AtomicInteger counter;
-        final private int workStart; final private int workEnd;
-
-        public VerificationWorker(String workName, int workStart, int workEnd, AtomicInteger counter) {
-            super(workName);
-            this.workStart = workStart;
-            this.workEnd = workEnd;
-            this.counter = counter;
-        }
-        public void run() {
-            System.out.println(getName()+" is working.");
-            for (int i=workStart;i<workEnd;i++) {
-                if (isPrime(i)) counter.incrementAndGet();
-            }
-            System.out.println(getName()+" is done.");
-        }
-    }
 }
