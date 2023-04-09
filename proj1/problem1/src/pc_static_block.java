@@ -46,7 +46,7 @@ public class pc_static_block {
         for (int i=0;i<subTasks.length;i++) {
             if (i!=0) {workStart = subTasks[i-1]+1;}
             workEnd = subTasks[i];
-            workers[i] = new PrimeCheckWorker("WID: " + i, workStart, workEnd, counter);
+            workers[i] = new PrimeCheckBlockWorker(i, workStart, workEnd, counter);
         }
         return workers;
     }

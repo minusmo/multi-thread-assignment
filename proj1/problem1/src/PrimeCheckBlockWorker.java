@@ -1,11 +1,11 @@
 import java.util.concurrent.atomic.AtomicInteger;
-    public class PrimeCheckWorker extends Thread {
+    public class PrimeCheckBlockWorker extends Thread {
         final private AtomicInteger counter;
         final private int workStart;
         final private int workEnd;
 
-        public PrimeCheckWorker(String workName, int workStart, int workEnd, AtomicInteger counter) {
-            super(workName);
+        public PrimeCheckBlockWorker(int wid, int workStart, int workEnd, AtomicInteger counter) {
+            super("WID "+wid);
             this.workStart = workStart;
             this.workEnd = workEnd;
             this.counter = counter;
