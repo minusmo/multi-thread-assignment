@@ -2,18 +2,18 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class pc_static_block {
     private static int NUM_END = 200000; // default input
-    private static int NUM_TREADS = 1;
+    private static int NUM_THREADS = 1;
     // In static load balancing, we use block decomposition.
     // Which divide whole task into subtasks.
     // The size of subtasks are statically defined.
     // Which is calculated by (task size) / (number of workers(threads))
     public static void main(String[] args) {
         if (args.length == 2) {
-            NUM_TREADS = Integer.parseInt(args[0]);
+            NUM_THREADS = Integer.parseInt(args[0]);
             NUM_END = Integer.parseInt(args[1]);
         }
         AtomicInteger counter = new AtomicInteger(0);
-        int[] workloads = divideIntoSubtasks(NUM_END, NUM_TREADS);
+        int[] workloads = divideIntoSubtasks(NUM_END, NUM_THREADS);
         Thread[] workers = createWorkers(workloads, counter);
         long startTime = System.currentTimeMillis();
         for (Thread worker : workers) {

@@ -2,7 +2,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class pc_static_cyclic {
     private static int NUM_END = 200000; // default input
-    private static int NUM_TREADS = 1;
+    private static int NUM_THREADS = 1;
     private static final int TASK_SIZE = 10;
     // In static load balancing, we use cyclic decomposition.
     // Which divide whole task into subtasks in cyclic way.
@@ -10,11 +10,11 @@ public class pc_static_cyclic {
     // And the subtasks are assigned to each thread in cyclic way.
     public static void main(String[] args) {
         if (args.length == 2) {
-            NUM_TREADS = Integer.parseInt(args[0]);
+            NUM_THREADS = Integer.parseInt(args[0]);
             NUM_END = Integer.parseInt(args[1]);
         }
         AtomicInteger counter = new AtomicInteger(0);
-        Thread[] workers = assignSubTasks(NUM_END, NUM_TREADS, counter);
+        Thread[] workers = assignSubTasks(NUM_END, NUM_THREADS, counter);
         long startTime = System.currentTimeMillis();
         for (Thread worker : workers) {worker.start();}
         try {
