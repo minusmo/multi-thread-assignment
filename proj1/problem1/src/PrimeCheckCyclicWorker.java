@@ -14,13 +14,13 @@ public class PrimeCheckCyclicWorker extends Thread {
     }
 
     public void run() {
-        System.out.println(getName()+" is working.");
         int base = 1; int cycleEnd = Math.floorDiv(numEnd,stride);
-        int taskStart; int taskEnd;
+        int taskStart; int taskEnd; int threads = stride / taskSize;
+        System.out.println(getName()+" is working.");
         for (int i=0;i<cycleEnd;i++) {
             taskStart = base + taskSize * wid;
             taskEnd = taskStart + taskSize;
-            if (taskEnd > numEnd) {taskEnd = numEnd;}
+            if (i == cycleEnd-1 && wid == threads-1) {taskEnd = numEnd;}
             for (int j=taskStart;j<taskEnd;j++) {
                 if (isPrime(j)) {counter.incrementAndGet();}
             }
