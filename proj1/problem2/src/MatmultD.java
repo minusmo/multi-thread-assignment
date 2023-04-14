@@ -59,7 +59,7 @@ public class MatmultD
         int sum = 0;
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-//                System.out.printf("%4d " , mat[i][j]);
+                System.out.printf("%4d " , mat[i][j]);
                 sum+=mat[i][j];
             }
             System.out.println();
@@ -73,14 +73,12 @@ public class MatmultD
         // Decompose the matrix into number of threads.
         // For example, 4x4 -> 1x1 with 4 threads.
         // Each section's width and height is calculated in this way.
-        final int aRows = a.length; final int bRows = b.length;
-        final int aCols = a[0].length; final int bCols = b[0].length;
+        final int aRows = a.length;
+        final int aCols = a[0].length;
         final int[][] resultMatrix = new int[aRows][aCols];
         Thread[] workers = new Thread[threads];
-        int rowStart = 0; int colStart = 0; int rowEnd; int colEnd;
-        final int halfOfThreads = threads/2;
-        final int rowStride = Math.floorDiv(aRows,halfOfThreads); // 500 / 6 -> 83
-        final int colStride = Math.floorDiv(aCols, 2); // Always divide by 2.
+        int rowStart = 0; int rowEnd;
+        final int rowStride = Math.floorDiv(aRows,threads); // 500 / 6 -> 83
 
         // We divide the whole matrix in 2 parts. left and right.
         // Then divide each part into threads/2 parts again.
@@ -88,16 +86,12 @@ public class MatmultD
         // Divide 50 columns into 25 and 25 maybe not symmetric when the columns are odd.
         // The divide 50 rows into 16, 16 and 18.
         int wid = 0;
-        for (int i=0;i<2;i++) {
-            colStart = i * colStride;
-            colEnd = (i == 0) ? colStride : aCols;
-            for (int j=0;j<halfOfThreads;j++) {
-                rowStart = j * rowStride;
-                rowEnd = (j != halfOfThreads-1) ? rowStart + rowStride : aRows;
-                workers[wid] = new MatMultWorker(wid, a, b, resultMatrix, rowStart, rowEnd, colStart, colEnd);
-                workers[wid].start();
-                wid++;
-            }
+        for (int i=0;i<threads;i++) {
+            rowStart = i * rowStride;
+            rowEnd = (i != rowStride-1) ? rowStart + rowStride : aRows;
+            workers[wid] = new MatMultWorker(wid, a, b, resultMatrix, aCols, rowStart, rowEnd, 0, aCols);
+            workers[wid].start();
+            wid++;
         }
         try {
             for (Thread worker : workers) {
