@@ -13,3 +13,12 @@ Make an multi-thread java application and analyze the performance.
 *Plese use CPU with more than 4 cores.
 
  
+## Environment
+### CPU Type
+Apple M1 Pro 
+### Number of cores
+8(6 for Performance, 2 for Efficiency)
+### Memory Size
+16GB
+### OS Type
+mac os Ventura 13.3.1
