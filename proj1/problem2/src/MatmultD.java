@@ -59,10 +59,10 @@ public class MatmultD
         int sum = 0;
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-                System.out.printf("%4d " , mat[i][j]);
+//                System.out.printf("%4d " , mat[i][j]);
                 sum+=mat[i][j];
             }
-            System.out.println();
+//            System.out.println();
         }
         System.out.println();
         System.out.println("Matrix Sum = " + sum + "\n");
@@ -88,7 +88,7 @@ public class MatmultD
         int wid = 0;
         for (int i=0;i<threads;i++) {
             rowStart = i * rowStride;
-            rowEnd = (i != rowStride-1) ? rowStart + rowStride : aRows;
+            rowEnd = (i != threads-1) ? rowStart + rowStride : aRows;
             workers[wid] = new MatMultWorker(wid, a, b, resultMatrix, aCols, rowStart, rowEnd, 0, aCols);
             workers[wid].start();
             wid++;
