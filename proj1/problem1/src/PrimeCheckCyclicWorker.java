@@ -17,6 +17,7 @@ public class PrimeCheckCyclicWorker extends Thread {
         int base = 1; int cycleEnd = Math.floorDiv(numEnd,stride);
         int taskStart; int taskEnd; int threads = stride / taskSize;
         System.out.println(getName()+" is working.");
+        long startTime = System.currentTimeMillis();
         for (int i=0;i<cycleEnd;i++) {
             taskStart = base + taskSize * wid;
             taskEnd = taskStart + taskSize;
@@ -26,7 +27,10 @@ public class PrimeCheckCyclicWorker extends Thread {
             }
             base += stride;
         }
+        long endTime = System.currentTimeMillis();
         System.out.println(getName()+" is done.");
+        String execTimeMsg = "Execution time of " + getName() + " is " + (endTime - startTime);
+        System.out.println(execTimeMsg);
     }
     private boolean isPrime(int x) {
         int i;

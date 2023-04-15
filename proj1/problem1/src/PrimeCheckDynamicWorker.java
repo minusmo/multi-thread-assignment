@@ -20,11 +20,15 @@ public class PrimeCheckDynamicWorker extends Thread {
         System.out.println(getName()+" is working.");
         int workStart = workDone + 1;
         int workEnd = workStart + workSize;
+        long startTime = System.currentTimeMillis();
         for (int i=workStart;i<workEnd;i++) {
             if (isPrime(i)) this.counter.incrementAndGet();
         }
+        long endTime = System.currentTimeMillis();
         this.primeCheckWorkerGroup.rest();
         System.out.println(getName()+" is done.");
+        String execTimeMsg = "Execution time of " + getName() + " is " + (endTime - startTime);
+        System.out.println(execTimeMsg);
     }
     private boolean isPrime(int x) {
         int i;

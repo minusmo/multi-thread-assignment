@@ -13,10 +13,14 @@ import java.util.concurrent.atomic.AtomicInteger;
 
         public void run() {
             System.out.println(getName() + " is working.");
+            long startTime = System.currentTimeMillis();
             for (int i = workStart; i < workEnd; i++) {
                 if (isPrime(i)) counter.incrementAndGet();
             }
+            long endTime = System.currentTimeMillis();
             System.out.println(getName() + " is done.");
+            String execTimeMsg = "Execution time of " + getName() + " is " + (endTime - startTime);
+            System.out.println(execTimeMsg);
         }
         private boolean isPrime(int x) {
             int i;

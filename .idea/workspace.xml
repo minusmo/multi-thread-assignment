@@ -4,9 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3571e9a1-6d9d-4f9b-acd1-c7b497c13400" name="Changes" comment="">
+    <list default="true" id="3571e9a1-6d9d-4f9b-acd1-c7b497c13400" name="Changes" comment="docs(readme): update readme about cores">
+      <change afterPath="$PROJECT_DIR$/proj1/problem1/performance_report.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proj1/problem1/report_assets/execution_time_comparison_by_load_balancing_strategies.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proj1/problem1/report_assets/performance_comparison_by_load_balancing_strategies.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proj1/problem1/report_assets/primecheck_table_exectime.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proj1/problem1/report_assets/primecheck_table_performance.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proj1/problem1/videos/problem1_video.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proj1/problem2/performance_report.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proj1/problem2/report_assets/matmult_static (block).png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proj1/problem2/report_assets/matmult_static (block)_performance.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proj1/problem2/report_assets/matmult_table_exectime.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proj1/problem2/report_assets/matmult_table_performance.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proj1/problem2/videos/problem2_video.mp4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proj1/problem1/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proj1/problem1/src/PrimeCheckBlockWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/proj1/problem1/src/PrimeCheckBlockWorker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proj1/problem1/src/PrimeCheckCyclicWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/proj1/problem1/src/PrimeCheckCyclicWorker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proj1/problem1/src/PrimeCheckDynamicWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/proj1/problem1/src/PrimeCheckDynamicWorker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proj1/problem2/src/MatMultWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/proj1/problem2/src/MatMultWorker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proj1/problem2/src/MatmultD.java" beforeDir="false" afterPath="$PROJECT_DIR$/proj1/problem2/src/MatmultD.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,9 +52,19 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.applicationServers&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/proj1/problem2/report_assets" />
+      <recent name="$PROJECT_DIR$/proj1/problem1/report_assets" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -48,11 +76,35 @@
       <workItem from="1680942952520" duration="102000" />
       <workItem from="1681286685999" duration="8000" />
       <workItem from="1681479036039" duration="721000" />
-      <workItem from="1681528508034" duration="71000" />
+      <workItem from="1681528508034" duration="15615000" />
+      <workItem from="1681571640198" duration="94000" />
     </task>
+    <task id="LOCAL-00001" summary="docs(readme): update readme about cores">
+      <created>1681528617182</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1681528617182</updated>
+    </task>
+    <task id="LOCAL-00002" summary="docs(readme): update readme about cores">
+      <created>1681528748458</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1681528748458</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="docs(readme): update readme about cores" />
+    <option name="LAST_COMMIT_MESSAGE" value="docs(readme): update readme about cores" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

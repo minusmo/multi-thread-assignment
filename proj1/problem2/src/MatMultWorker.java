@@ -18,6 +18,7 @@ public class MatMultWorker extends Thread {
 
     public void run() {
         System.out.println(getName()+" is working.");
+        long startTime = System.currentTimeMillis();
         for (int i=rowStart;i<rowEnd;i++) {
             for (int j=colStart;j<colEnd;j++) {
                 for (int k=0;k<aCols;k++) {
@@ -25,6 +26,9 @@ public class MatMultWorker extends Thread {
                 }
             }
         }
+        long endTime = System.currentTimeMillis();
         System.out.println(getName()+" is done.");
+        String execTimeMsg = "Execution time of " + getName() + " is " + (endTime - startTime);
+        System.out.println(execTimeMsg);
     }
 }
