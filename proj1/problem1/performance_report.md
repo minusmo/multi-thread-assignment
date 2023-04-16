@@ -367,9 +367,41 @@ public class PrimeCheckDynamicWorker extends Thread {
 ```
 
 ### Execution Image and Output
-![execution image for block decomposition]()
-![execution image for cyclic decomposition]()
-![execution image for dynamic load balancing]()
+execution image for block decomposition using 2 threads  
+![execution image for block decomposition using 2 threads](./report_assets/block_exec_2.png)  
+
+output image for block decomposition using 2 threads  
+![output image for block decomposition using 2 threads](./report_assets/block_output_2.png)  
+
+execution image for block decomposition using 4 threads  
+![execution image for block decomposition using 4 threads](./report_assets/block_exec_4.png)  
+
+output image for block decomposition using 4 threads  
+![output image for block decomposition using 4 threads](./report_assets/block_output_4.png)  
+
+execution image for cyclic decomposition using 2 threads  
+![execution image for cyclic decomposition using 2 threads](./report_assets/cyclic_exec_2.png)  
+
+output image for cyclic decomposition using 2 threads    
+![output image for cyclic decomposition using 2 threads](./report_assets/cyclic_output_2.png)  
+
+execution image for cyclic decomposition using 4 threads  
+![execution image for cyclic decomposition using 4 threads](./report_assets/cyclic_exec_4.png)  
+
+output image for cyclic decomposition using 4 threads  
+![output image for cyclic decomposition using 4 threads](./report_assets/cyclic_output_4.png)  
+
+execution image for dynamic load balancing using 2 threads  
+![execution image for dynamic load balancing using 2 threads](./report_assets/dynamic_exec_2.png)  
+
+output image for dynamic load balancing using 2 threads    
+![output image for dynamic load balancing using 2 threads](./report_assets/dynamic_output_2.png)  
+
+execution image for dynamic load balancing using 4 threads  
+![execution image for dynamic load balancing using 4 threads](./report_assets/dynamic_exec_4.png)  
+
+output image for dynamic load balancing using 4 threads  
+![output image for dynamic load balancing using 4 threads](./report_assets/dynamic_output_4.png)  
 
 ## Guide for Compilation and Execution
 ### Requirements for compilation and execution

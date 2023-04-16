@@ -226,9 +226,18 @@ public class MatMultWorker extends Thread {
 
 ```
 
-### Execution Image and Output
-![execution image for matrix multiplication]()
-![output image for matrix multiplication]()
+### Execution Image and Output Image
+execution image for matrix multiplication using 2 thread  
+![execution image for matrix multiplication using 2 thread](./report_assets/matmult_execution_2.png)  
+
+output image for matrix multiplication using 2 thread  
+![output image for matrix multiplication using 2 thread](./report_assets/matmult_output_2.png)  
+
+execution image for matrix multiplication using 4 thread  
+![execution image for matrix multiplication using 4 thread](./report_assets/matmult_execution_4.png)   
+
+output image for matrix multiplication using 4 thread    
+![output image for matrix multiplication using 4 thread](./report_assets/matmult_output_4.png)  
 
 ## Guide for Compilation and Execution
 ### Requirements for compilation and execution

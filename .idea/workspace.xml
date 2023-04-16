@@ -4,28 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3571e9a1-6d9d-4f9b-acd1-c7b497c13400" name="Changes" comment="docs(readme): update readme about cores">
-      <change afterPath="$PROJECT_DIR$/proj1/problem1/performance_report.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proj1/problem1/report_assets/execution_time_comparison_by_load_balancing_strategies.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proj1/problem1/report_assets/performance_comparison_by_load_balancing_strategies.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proj1/problem1/report_assets/primecheck_table_exectime.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proj1/problem1/report_assets/primecheck_table_performance.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proj1/problem1/videos/problem1_video.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proj1/problem2/performance_report.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proj1/problem2/report_assets/matmult_static (block).png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proj1/problem2/report_assets/matmult_static (block)_performance.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proj1/problem2/report_assets/matmult_table_exectime.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proj1/problem2/report_assets/matmult_table_performance.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proj1/problem2/videos/problem2_video.mp4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proj1/problem1/src/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/proj1/problem1/src/PrimeCheckBlockWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/proj1/problem1/src/PrimeCheckBlockWorker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proj1/problem1/src/PrimeCheckCyclicWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/proj1/problem1/src/PrimeCheckCyclicWorker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proj1/problem1/src/PrimeCheckDynamicWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/proj1/problem1/src/PrimeCheckDynamicWorker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proj1/problem2/src/MatMultWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/proj1/problem2/src/MatMultWorker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proj1/problem2/src/MatmultD.java" beforeDir="false" afterPath="$PROJECT_DIR$/proj1/problem2/src/MatmultD.java" afterDir="false" />
-    </list>
+    <list default="true" id="3571e9a1-6d9d-4f9b-acd1-c7b497c13400" name="Changes" comment="docs(readme): update readme about cores" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -77,7 +56,7 @@
       <workItem from="1681286685999" duration="8000" />
       <workItem from="1681479036039" duration="721000" />
       <workItem from="1681528508034" duration="15615000" />
-      <workItem from="1681571640198" duration="94000" />
+      <workItem from="1681571640198" duration="368000" />
     </task>
     <task id="LOCAL-00001" summary="docs(readme): update readme about cores">
       <created>1681528617182</created>

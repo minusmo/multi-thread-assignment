@@ -27,7 +27,7 @@ public class PrimeCheckDynamicWorker extends Thread {
         long endTime = System.currentTimeMillis();
         this.primeCheckWorkerGroup.rest();
         System.out.println(getName()+" is done.");
-        String execTimeMsg = "Execution time of " + getName() + " is " + (endTime - startTime);
+        String execTimeMsg = "Execution time of " + getName() + " is " + (endTime - startTime) + "ms";
         System.out.println(execTimeMsg);
     }
     private boolean isPrime(int x) {

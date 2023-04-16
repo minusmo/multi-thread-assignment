@@ -19,7 +19,7 @@ import java.util.concurrent.atomic.AtomicInteger;
             }
             long endTime = System.currentTimeMillis();
             System.out.println(getName() + " is done.");
-            String execTimeMsg = "Execution time of " + getName() + " is " + (endTime - startTime);
+            String execTimeMsg = "Execution time of " + getName() + " is " + (endTime - startTime) + "ms";
             System.out.println(execTimeMsg);
         }
         private boolean isPrime(int x) {
