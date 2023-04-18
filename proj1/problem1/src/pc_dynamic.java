@@ -19,7 +19,20 @@ public class pc_dynamic {
     }
 
     private static void checkPrimeNumberDynamically(int num_threads, int num_end, int taskSize, AtomicInteger counter) {
-        PrimeCheckWorkerGroup workerGroup = new PrimeCheckWorkerGroup(num_threads, num_end, taskSize, counter);
-        workerGroup.work();
+        int wid = 0;
+        AtomicInteger numbersChecked = new AtomicInteger(0);
+        AtomicInteger numbersLeft = new AtomicInteger(num_end);
+        int availableWorkers = num_threads;
+        Thread[] workers = new Thread[num_threads];
+        for (int i=0;i<num_threads;i++) {
+            wid = availableWorkers % num_threads; availableWorkers--;
+            workers[i] = new PrimeCheckDynamicWorker(wid, numbersChecked, numbersLeft, taskSize, counter);
+            workers[i].start();
+        }
+        for (Thread worker : workers) {
+            try {
+                worker.join();
+            } catch (InterruptedException e) {}
+        }
     }
 }
