@@ -14,26 +14,20 @@ public class PrimeCheckWorkerGroup {
         this.counter = counter;
         this.totalWorkers = threads;
     }
-    public synchronized void work() {
+    public void work() {
         int workSize = 0; int wid = 0;
-        int numbersChecked = 0;
-        while (numbersChecked < (this.numEnd-1)) {
-            workSize = Math.min((this.numEnd - 1 - numbersChecked), this.taskSize);
-            if (availableWorkers.get() == 0) {
-                try {wait();}
-                catch (InterruptedException e) {}
-            }
-            else {
-                wid = availableWorkers.getAndDecrement() % totalWorkers;
-                PrimeCheckDynamicWorker worker = new PrimeCheckDynamicWorker(wid,this, numbersChecked, workSize, counter);
-                worker.start();
-                numbersChecked += workSize;
-            }
+        AtomicInteger numbersChecked = new AtomicInteger(0);
+        AtomicInteger numbersLeft = new AtomicInteger(numEnd);
+        Thread[] workers = new Thread[totalWorkers];
+        for (int i=0;i<totalWorkers;i++) {
+            wid = availableWorkers.getAndDecrement() % totalWorkers;
+            workers[i] = new PrimeCheckDynamicWorker(wid, numbersChecked, numbersLeft, taskSize, counter);
+            workers[i].start();
         }
-    }
-
-    public synchronized void rest() {
-        this.availableWorkers.incrementAndGet();
-        notify();
+        for (Thread worker : workers) {
+            try {
+                worker.join();
+            } catch (InterruptedException e) {}
+        }
     }
 }

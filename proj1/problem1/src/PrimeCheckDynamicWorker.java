@@ -2,31 +2,37 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class PrimeCheckDynamicWorker extends Thread {
     private final int wid;
-    private final PrimeCheckWorkerGroup primeCheckWorkerGroup;
-    private final int workDone;
+    private final AtomicInteger workDone;
+    private final AtomicInteger workLeft;
     private final AtomicInteger counter;
-    private final int workSize;
+    private final int taskSize;
 
-    public PrimeCheckDynamicWorker(int wid, PrimeCheckWorkerGroup primeCheckWorkerGroup, int workDone, int workSize, AtomicInteger counter) {
+    public PrimeCheckDynamicWorker(int wid, AtomicInteger workDone, AtomicInteger workLeft, int taskSize, AtomicInteger counter) {
         super("WID "+wid);
         this.wid = wid;
-        this.primeCheckWorkerGroup = primeCheckWorkerGroup;
         this.workDone = workDone;
-        this.workSize = workSize;
+        this.workLeft = workLeft;
         this.counter = counter;
+        this.taskSize = taskSize;
     }
 
     public void run() {
-        System.out.println(getName()+" is working.");
-        int workStart = workDone + 1;
-        int workEnd = workStart + workSize;
+        int workSize;
         long startTime = System.currentTimeMillis();
-        for (int i=workStart;i<workEnd;i++) {
-            if (isPrime(i)) this.counter.incrementAndGet();
+        System.out.println(getName()+" started job.");
+        while (workLeft.get() > 0) {
+            System.out.println(getName()+" is working on a task.");
+            workSize = Math.min(workLeft.get(), taskSize);
+            workLeft.accumulateAndGet(-workSize, Integer::sum);
+            int workStart = workDone.getAndAccumulate(workSize, Integer::sum) + 1;
+            int workEnd = workStart + workSize;
+            for (int i=workStart;i<workEnd;i++) {
+                if (isPrime(i)) this.counter.incrementAndGet();
+            }
+            System.out.println(getName()+" finished a task.");
         }
         long endTime = System.currentTimeMillis();
-        this.primeCheckWorkerGroup.rest();
-        System.out.println(getName()+" is done.");
+        System.out.println(getName()+" finished job.");
         String execTimeMsg = "Execution time of " + getName() + " is " + (endTime - startTime) + "ms";
         System.out.println(execTimeMsg);
     }
