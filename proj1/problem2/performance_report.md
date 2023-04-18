@@ -1,4 +1,5 @@
 # 2023 - Spring, Multi Core Computing Assignment1, Problem2 Performance Report
+20150736 음호준  
 
 ## Environment
 ### CPU Type
@@ -231,9 +232,10 @@ output image for matrix multiplication using 4 thread
 ## Guide for Compilation and Execution
 ### Requirements for compilation and execution
 - OS: macos(latest)  
-  you can use other os of course, but please setup specific compilation, execution options by yourself.
+  you can use other OS of course, but please setup specific compilation, execution options by yourself.
 - Processor: M1 Pro(processors can differ by each case of testing environments)
 - Cores: 8(6 for performance, 2 for efficiency)
+- Memory: 16GB(please use more than 8GB)
 - IntelliJ IDEA 2023.1 (Ultimate Edition)
   Runtime version: 17.0.6+10-b829.5 aarch64
   VM: OpenJDK 64-Bit Server VM by JetBrains s.r.o.  
