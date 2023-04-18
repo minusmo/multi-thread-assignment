@@ -46,10 +46,10 @@ Then, each thread performs its task individually.
 3. Dynamic Load Balancing
 Assign the numbers from 1 to 199999 into number of subtasks in dynamic manner. The size of subtask is fixed to 10.  
 Each thread takes subtask(which has size of 10) from 1 to 199999 sequentially.
-Dynamic manner means, the worker(thread) take its subtask(work) dynamically when it finishes assigned work.  
+Dynamic manner means, the worker(thread) takes its subtask(work) dynamically when it finishes assigned work.  
 For instance, if I have to use 4 threads, then each thread numbered from 0 to 3 takes subtask as follows.  
 > At start, each thread takes subtask like cyclic decomposition(described above)  
-> And let's say 2nd thread finishes its work, then it takes subtask(which has size of 10) from remaining task(the numbers not checked)
+> And let's say 2nd thread finishes its work first, then it takes subtask(which has size of 10) from remaining task(the numbers not checked)
 
 The result of block and cyclic decomposition is quite similar.  
 The Performance(1/execution time(ms)) is increase rapidly when the number of thread is small.
@@ -70,7 +70,7 @@ overhead when using cores more than the computer system's maximum cores. As the 
 
 In case of dynamic decomposition,  
 The performance didn't increase much as static decomposition.  
-The performance grows very slowly from 1 thread to 32 threads.  
+The performance grows slower than static load balancing methods from 1 thread to 32 threads.  
 The reasonable analysis for this phenomenon seems that there were problem with efficient algorithm for 
 dynamic load balancing. As the task goes by, we don't know which thread(worker) finishes earlier. Then, 
 naturally the bad case of load balancing can occur. For example, if we use 4 threads, then 2nd and 3rd worker 
@@ -80,7 +80,7 @@ This case results in improper and inefficient load balancing(not well-balanced s
 In conclusion, 
 We can see the tendency of increasing performance by the number of thread increasing, but there were 
 also differences and challenges by approaches.  
-I can capture the importance of proper dynamic load balancing strategy for performance, 
+I recognized the importance of proper dynamic load balancing strategy for performance, 
 and thread management, scheduling strategy for performance.  
 Although I can't know what thread management strategy is used for Apple M1 Pro processor, but 
 I can surely know there are challenges for using more threads than cores. 
@@ -275,83 +275,68 @@ public class pc_dynamic {
     }
 
     private static void checkPrimeNumberDynamically(int num_threads, int num_end, int taskSize, AtomicInteger counter) {
-        PrimeCheckWorkerGroup workerGroup = new PrimeCheckWorkerGroup(num_threads, num_end, taskSize, counter);
-        workerGroup.work();
+        int wid = 0;
+        AtomicInteger numbersChecked = new AtomicInteger(0);
+        AtomicInteger numbersLeft = new AtomicInteger(num_end);
+        int availableWorkers = num_threads;
+        Thread[] workers = new Thread[num_threads];
+        for (int i=0;i<num_threads;i++) {
+            wid = availableWorkers % num_threads; availableWorkers--;
+            workers[i] = new PrimeCheckDynamicWorker(wid, numbersChecked, numbersLeft, taskSize, counter);
+            workers[i].start();
+        }
+        for (Thread worker : workers) {
+            try {
+                worker.join();
+            } catch (InterruptedException e) {}
+        }
     }
 }
 
-public class PrimeCheckWorkerGroup {
-   private final int numEnd;
-   private final int taskSize;
-   private final int totalWorkers;
-   private final AtomicInteger counter;
-   private final AtomicInteger availableWorkers;
-
-   public PrimeCheckWorkerGroup(int threads, int numEnd, int taskSize, AtomicInteger counter) {
-      this.availableWorkers = new AtomicInteger(threads);
-      this.numEnd = numEnd;
-      this.taskSize = taskSize;
-      this.counter = counter;
-      this.totalWorkers = threads;
-   }
-   public synchronized void work() {
-      int workSize = 0; int wid = 0;
-      int numbersChecked = 0;
-      while (numbersChecked < (this.numEnd-1)) {
-         workSize = Math.min((this.numEnd - 1 - numbersChecked), this.taskSize);
-         if (availableWorkers.get() == 0) {
-            try {wait();}
-            catch (InterruptedException e) {}
-         }
-         else {
-            wid = availableWorkers.getAndDecrement() % totalWorkers;
-            PrimeCheckDynamicWorker worker = new PrimeCheckDynamicWorker(wid,this, numbersChecked, workSize, counter);
-            worker.start();
-            numbersChecked += workSize;
-         }
-      }
-   }
-
-   public synchronized void rest() {
-      this.availableWorkers.incrementAndGet();
-      notify();
-   }
-}
-
 public class PrimeCheckDynamicWorker extends Thread {
-   private final int wid;
-   private final PrimeCheckWorkerGroup primeCheckWorkerGroup;
-   private final int workDone;
-   private final AtomicInteger counter;
-   private final int workSize;
+    private final int wid;
+    private final AtomicInteger workDone;
+    private final AtomicInteger workLeft;
+    private final AtomicInteger counter;
+    private final int taskSize;
 
-   public PrimeCheckDynamicWorker(int wid, PrimeCheckWorkerGroup primeCheckWorkerGroup, int workDone, int workSize, AtomicInteger counter) {
-      super("WID "+wid);
-      this.wid = wid;
-      this.primeCheckWorkerGroup = primeCheckWorkerGroup;
-      this.workDone = workDone;
-      this.workSize = workSize;
-      this.counter = counter;
-   }
+    public PrimeCheckDynamicWorker(int wid, AtomicInteger workDone, AtomicInteger workLeft, int taskSize, AtomicInteger counter) {
+        super("WID "+wid);
+        this.wid = wid;
+        this.workDone = workDone;
+        this.workLeft = workLeft;
+        this.counter = counter;
+        this.taskSize = taskSize;
+    }
 
-   public void run() {
-      System.out.println(getName()+" is working.");
-      int workStart = workDone + 1;
-      int workEnd = workStart + workSize;
-      for (int i=workStart;i<workEnd;i++) {
-         if (isPrime(i)) this.counter.incrementAndGet();
-      }
-      this.primeCheckWorkerGroup.rest();
-      System.out.println(getName()+" is done.");
-   }
-   private boolean isPrime(int x) {
-      int i;
-      if (x<=1) return false;
-      for (i=2;i<x;i++) {
-         if (x%i == 0) return false;
-      }
-      return true;
-   }
+    public void run() {
+        int workSize;
+        long startTime = System.currentTimeMillis();
+        System.out.println(getName()+" started job.");
+        while (workLeft.get() > 0) {
+            System.out.println(getName()+" is working on a task.");
+            workSize = Math.min(workLeft.get(), taskSize);
+            workLeft.accumulateAndGet(-workSize, Integer::sum);
+            int workStart = workDone.getAndAccumulate(workSize, Integer::sum) + 1;
+            int workEnd = workStart + workSize;
+            for (int i=workStart;i<workEnd;i++) {
+                if (isPrime(i)) this.counter.incrementAndGet();
+            }
+            System.out.println(getName()+" finished a task.");
+        }
+        long endTime = System.currentTimeMillis();
+        System.out.println(getName()+" finished job.");
+        String execTimeMsg = "Execution time of " + getName() + " is " + (endTime - startTime) + "ms";
+        System.out.println(execTimeMsg);
+    }
+    private boolean isPrime(int x) {
+        int i;
+        if (x<=1) return false;
+        for (i=2;i<x;i++) {
+            if (x%i == 0) return false;
+        }
+        return true;
+    }
 }
 ```
 
